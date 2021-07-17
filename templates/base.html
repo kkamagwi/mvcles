@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>My firs site</title>
+    </head>
+    <body>
+        <a href="{% url 'all_news' %}" >новости</a>
+        <a href="{% url 'news_new' %}" >создать новсть</a>
+        <br>
+        {% block content %}
+
+        {% endblock %}
+    </body>
+</html>

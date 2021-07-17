@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Hello World</h1>
+    <font size=6>{{news_detail.title}}</font>
+    <br>
+    {{news_detail.text}}
+    <br>
+    <img src={{news_detail.img}}>
+    <a href="{% url 'news_edit' pk=news_detail.pk %}">Редактировать</a>
+    <a href="{% url 'news_delete' pk=news_detail.pk %}">Удалит</a>
+{% endblock %}
