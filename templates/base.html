@@ -1,6 +1,9 @@
+{% load static %}
+
 <html>
     <head>
         <title>My firs site</title>
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
     </head>
     <body>
         <a href="{% url 'all_news' %}" >новости</a>

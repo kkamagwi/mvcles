@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseNotFound
 from .models import News, Tag
 from .forms import NewsForm
+from comments.forms import CommentForm
 
 def news(request):
     news = News.objects.all()
@@ -9,9 +10,21 @@ def news(request):
     {'all_news': news})
 
 def news_detail(request, pk):
-    one_news = get_object_or_404(News, pk=pk)
-    return render(request, 'news/news_detail.html', 
-    {'news_detail': one_news})
+    news_detail = get_object_or_404(News, pk=pk)
+    comments = news_detail.comments.filter(active=True)
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.post = news_detail
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+    return render(request, 
+                'news/news_detail.html', 
+                {'news_detail': news_detail,
+                'comments': comments,
+                'comment_form': comment_form})
 
 def news_new(request):
     if request.method == "POST":
