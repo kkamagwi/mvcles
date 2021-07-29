@@ -6,7 +6,7 @@ class NewsForm(forms.ModelForm):
 
     class Meta:
         model = News
-        fields = ('title', 'text', 'img')
+        fields = ('title', 'text', 'img', "tag")
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
